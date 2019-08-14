@@ -42,9 +42,29 @@
                   <p mat-line>{{dishComment.rating}} Stars</p>
                   <p mat-line>-- {{dishComment.author}} {{dishComment.date | date}}</p>
                 </mat-list-item>
+              </mat-list>
+              <mat-list>
+                <form [formGroup]="yourCommentForm" #cform="ngForm" (ngSubmit)="onSubmit()">
+                <p>
+                  <mat-form-field class="half-width">
+                    <input matInput formControlName="author" placeholder="Name" type="text" required>
+                    <mat-error *ngIf="formErrors.author">{{formErrors.author}}</mat-error>
+                  </mat-form-field>
+                </p>
+                <p>
+                  <mat-slider formControlName="rating" min="1" max="5" step="1" value="5"></mat-slider>
+                </p>
+                <p>
+                  <mat-form-field class="half-width">
+                    <textarea rows="10" matInput formControlName="comment" placeholder="Your Comment" type="text" required></textarea>
+                    <mat-error *ngIf="formErrors.comment">{{formErrors.comment}}</mat-error>
+                  </mat-form-field>
+                </p>
+                <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="yourCommentForm.invalid" >Submit</button>
+              </form>          
             </mat-list>
         </mat-card-content>
-      </mat-card>   
+    </mat-card>   
     </div>
   </div>
 </div>
